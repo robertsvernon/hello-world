@@ -1,40 +1,94 @@
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-animate.js"></script>
-
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
     <style>
-        .box {
-            margin: 20px auto;
-            background: #5FCF80;
-            width: 150px;
-            height: 150px;
-        }
+        @keyframes jump {
+            0% {
+                top: 200px;
+            }
 
-        .circle {
-            transform: rotate(360deg);
-            background: #9351A6;
-            border-radius: 50%;
-            margin: 20px auto;
-            width: 150px;
-            height: 150px;
-        }
+            50% {
+                top: 150px;
+            }
 
-        .rotate {
-            transition: all 1s ease-in-out;
+            100% {
+                top: 200px;
+            }
         }
     </style>
-    <div ng-app="myApp" ng-controller="MainCtrl">
-        <div class="container">
-            <input type="text" id="input" ng-keydown="boxClass=!boxClass" />
-            <div class="box rotate" ng-class="{'box': boxClass, 'circle': !boxClass} ">
-                <img src="https://robertsvernon.github.io/hello-world/FFCar.png" />
-            </div>
-        </div>
-    </div>
 
+    <div ng-app="myApp" ng-controller="myCtrl">
+
+        <button ng-click="upFunction()">&#9757;</button>
+        <button ng-click="lFunction()">&#9756;</button>
+        <button ng-click="rFunction()">&#9755;</button>
+
+        <div id="uID" style="position:absolute;top:200px;right:200px">hi</div>
+        <div style="position:relative; top:200px;right:0px; background-color:aqua; height:2000px;width:2000px">
+        </div>
+        <div id="tut" style="background-color:green;position:absolute;width:10px;height:10px;top:200px;right:50px">
+        </div>
+
+    </div>
     <script>
-        angular.module('myApp', [])
-            .controller('MainCtrl', function ($scope) {
-                $scope.boxClass = true;
-            });
-        document.getElementById("input").focus();
+        var app = angular.module('myApp', []);
+        app.controller('myCtrl', function ($scope, $interval) {
+            $scope.x = 200;
+            $scope.y = 200;
+            $scope.canJump = true;
+            var height=0
+
+            $scope.upFunction = function () {
+                $scope.canJump = false
+                document.getElementById("uID").style = "position:absolute;right:" + $scope.x + "px;" + "top:" + ($scope.y-50) + "px";
+            };
+
+
+            $scope.downFunction = function () {
+                document.getElementById("uID").style = "position:absolute;right:" + $scope.x + "px;" + "top:" + ($scope.y) + "px";
+            };
+
+            $scope.lFunction = function () {
+                $scope.x = $scope.x + 10;
+                document.getElementById("uID").style = "position:absolute;right:" + $scope.x + "px;" + "top:" + $scope.y + "px";
+            };
+
+            $scope.rFunction = function () {
+                $scope.x = $scope.x - 10;
+                document.getElementById("uID").style = "position:absolute;right:" + $scope.x + "px;" + "top:" + $scope.y + "px";
+            };
+
+            $scope.lTFunction = function () {
+                if ($scope.tX < 1000) {
+                    $scope.tX = $scope.tX + 10;
+                }
+                else {
+                    $scope.tX = 0;
+                }
+                document.getElementById("tut").style = "background-color:green;position:absolute;width:10px;height:10px;right:" + $scope.tX + "px;" + "top:200px";
+            };
+
+            $interval(function () {
+                if (!$scope.canJump) {
+                    height++;
+
+                    if (height > 5) {
+                        $scope.downFunction()
+                        height = 0
+                        $scope.canJump = true;
+                    }
+                }
+                $scope.lTFunction();
+                var u = document.getElementById("uID").attributes.getNamedItem("style").value.split(";right:")[1]
+                var t = document.getElementById("tut").attributes.getNamedItem("style").value.split("right:")[1];
+                var uDown = document.getElementById("uID").attributes.getNamedItem("style").value.split(";right:")[0].endsWith("top:200px")
+                if (t == u) {
+                    if (uDown) {
+                        alert("hit")
+                    }
+                }
+
+            }, 100);
+        }
+            );
     </script>
+
+<img src="https://robertsvernon.github.io/hello-world/FFCar.png" />   
