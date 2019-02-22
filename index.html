@@ -1,10 +1,39 @@
-<h1>This is a test.</h1>
-<h3>(and its working, lol)</h3>
-<div ng-app="">
- 
-<p>Input something in the input box:</p>
-<p>Name : <input type="text" ng-model="name" placeholder="Enter name here"></p>
-<h1>Hello {{name}}</h1>
 
-</div>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-animate.js"></script>
+
+    <style>
+        .box {
+            margin: 20px auto;
+            background: #5FCF80;
+            width: 150px;
+            height: 150px;
+        }
+
+        .circle {
+            transform: rotate(360deg);
+            background: #9351A6;
+            border-radius: 50%;
+            margin: 20px auto;
+            width: 150px;
+            height: 150px;
+        }
+
+        .rotate {
+            transition: all 1s ease-in-out;
+        }
+    </style>
+
+    <div ng-app="myApp" ng-controller="MainCtrl">
+        <div class="container">
+            <input type="checkbox" ng-model="boxClass" />
+            <div class="box rotate" ng-class="{'box': boxClass, 'circle': !boxClass} "></div>
+        </div>
+    </div>
+
+    <script>
+        angular.module('myApp', [])
+            .controller('MainCtrl', function ($scope) {
+                $scope.boxClass = true;
+            });
+    </script>
