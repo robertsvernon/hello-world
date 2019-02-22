@@ -1,5 +1,4 @@
-
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+       <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-animate.js"></script>
 
     <style>
@@ -23,11 +22,12 @@
             transition: all 1s ease-in-out;
         }
     </style>
-
     <div ng-app="myApp" ng-controller="MainCtrl">
         <div class="container">
-            <input type="checkbox" ng-model="boxClass" />
-            <div class="box rotate" ng-class="{'box': boxClass, 'circle': !boxClass} "></div>
+            <input type="text" ng-keydown="boxClass=!boxClass" id="input" ng-model="boxClass" />
+            <div class="box rotate" ng-class="{'box': boxClass, 'circle': !boxClass} ">
+                <img src="https://robertsvernon.github.io/hello-world/FFCar.png" />
+            </div>
         </div>
     </div>
 
@@ -36,4 +36,5 @@
             .controller('MainCtrl', function ($scope) {
                 $scope.boxClass = true;
             });
+        document.getElementById("input").focus();
     </script>
