@@ -1,4 +1,4 @@
-       <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-animate.js"></script>
 
     <style>
@@ -24,7 +24,7 @@
     </style>
     <div ng-app="myApp" ng-controller="MainCtrl">
         <div class="container">
-            <input type="text" ng-keydown="boxClass=!boxClass" id="input" ng-model="boxClass" />
+            <input type="text" id="input" ng-keydown="boxClass=!boxClass" />
             <div class="box rotate" ng-class="{'box': boxClass, 'circle': !boxClass} ">
                 <img src="https://robertsvernon.github.io/hello-world/FFCar.png" />
             </div>
