@@ -1,32 +1,29 @@
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
-    <style>
-        @keyframes jump {
-            0% {
-                top: 200px;
-            }
+<!DOCTYPE html>
 
-            50% {
-                top: 150px;
-            }
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
 
-            100% {
-                top: 200px;
-            }
-        }
-    </style>
+<body>
 
-    <div ng-app="myApp" ng-controller="myCtrl">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 
+    <div id="app" ng-app="myApp" ng-controller="myCtrl">
+        
         <button ng-click="upFunction()">&#9757;</button>
         <button ng-click="lFunction()">&#9756;</button>
         <button ng-click="rFunction()">&#9755;</button>
 
-        <div id="uID" style="position:absolute;top:200px;right:200px">hi</div>
-        <div style="position:relative; top:200px;right:0px; background-color:aqua; height:2000px;width:2000px">
-        </div>
-        <div id="tut" style="background-color:green;position:absolute;width:10px;height:10px;top:200px;right:50px">
+        <div id="uID" style="position:absolute;top:200px;right:200px">
+            <img src="https://robertsvernon.github.io/hello-world/RobertSheran2010.jpg" />
         </div>
 
+        <div id="tut" style="background-color:green;position:absolute;width:10px;height:10px;top:200px;right:50px">
+            <img src="https://robertsvernon.github.io/hello-world/FFCar.png" />
+        </div>
+        
     </div>
     <script>
         var app = angular.module('myApp', []);
@@ -34,9 +31,27 @@
             $scope.x = 200;
             $scope.y = 200;
             $scope.canJump = true;
-            var height=0
+            var height = 0
 
-            $scope.upFunction = function () {
+  
+
+            document.addEventListener("keydown", function (e) {
+                switch (e.key) {
+                    case "ArrowUp":
+                        $scope.upFunction();
+                        break;
+                    case "ArrowLeft":
+                        $scope.lFunction();
+                        break;
+                    case "ArrowRight":
+                        $scope.rFunction();
+                        break;
+                    default:
+                }
+            });
+  
+
+            $scope.upFunction = function() {
                 $scope.canJump = false
                 document.getElementById("uID").style = "position:absolute;right:" + $scope.x + "px;" + "top:" + ($scope.y-50) + "px";
             };
@@ -91,4 +106,5 @@
             );
     </script>
 
-<img src="https://robertsvernon.github.io/hello-world/FFCar.png" />   
+</body>
+</html>
